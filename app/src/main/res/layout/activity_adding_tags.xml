@@ -11,7 +11,8 @@
         android:id="@+id/videoSurfaceContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/videoSurface"
         android:layout_alignParentStart="true">
 
     </FrameLayout>
@@ -21,27 +22,25 @@
         android:layout_width="386dp"
         android:layout_height="347dp"
         android:layout_gravity="center_horizontal|bottom"
-        android:layout_below="@+id/etVideoName"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Tag"
+        android:id="@+id/button2"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etVideoName"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:hint="Video Name"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white" />
+        android:id="@+id/editText"
+        android:hint="Add Tag Name"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="startTag"
-        android:text="Add Tags"
-        android:id="@+id/btnAddTag"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

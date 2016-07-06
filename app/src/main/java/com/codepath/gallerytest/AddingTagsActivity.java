@@ -11,7 +11,6 @@ import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.VideoView;
 
@@ -21,19 +20,18 @@ import java.io.IOException;
  * Created by kemleynieva on 7/6/16.
  */
 
-public class VideoPlayerActivity extends Activity implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener, VideoControllerView.MediaPlayerControl {
+public class AddingTagsActivity extends Activity implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener, VideoControllerView.MediaPlayerControl {
 
     SurfaceView videoSurface;
     MediaPlayer player;
     VideoControllerView controller;
     private static int RESULT_LOAD_VIDEO = 1;
     String imgDecodableString;
-    Uri selectedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_player);
+        setContentView(R.layout.activity_adding_tags);
         videoSurface = (SurfaceView) findViewById(R.id.videoSurface);
         getVideo();
 
@@ -52,7 +50,7 @@ public class VideoPlayerActivity extends Activity implements SurfaceHolder.Callb
             if (requestCode == RESULT_LOAD_VIDEO && resultCode == RESULT_OK
                     && null != data) {
 
-                selectedImage = data.getData();
+                Uri selectedImage = data.getData();
                 String[] filePathColumn = { MediaStore.Video.Media.DATA };
 
                 Cursor cursor = getContentResolver().query(selectedImage,
@@ -115,23 +113,23 @@ public class VideoPlayerActivity extends Activity implements SurfaceHolder.Callb
     public void surfaceDestroyed(SurfaceHolder holder) {
 
     }
-// End SurfaceHolder.Callback
+    // End SurfaceHolder.Callback
 // Implement MediaPlayer.OnPreparedListener
-@Override
-public void onPrepared(MediaPlayer mp) {
-    controller.setMediaPlayer(this);
-    controller.setAnchorView((FrameLayout) findViewById(R.id.videoSurfaceContainer));
-    player.start();
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        controller.setMediaPlayer(this);
+        controller.setAnchorView((FrameLayout) findViewById(R.id.videoSurfaceContainer));
+        player.start();
 
-    //BE SURE TO CAN THE TIME IF YOU WANT IT TO SHOW THE WHOLE TIME
-    controller.show(100000000);
-}
-// End MediaPlayer.OnPreparedListener
+        //BE SURE TO CAN THE TIME IF YOU WANT IT TO SHOW THE WHOLE TIME
+        controller.show(100000000);
+    }
+    // End MediaPlayer.OnPreparedListener
 // Implement VideoMediaController.MediaPlayerControl
-@Override
-public boolean canPause() {
-    return true;
-}
+    @Override
+    public boolean canPause() {
+        return true;
+    }
 
     @Override
     public boolean canSeekBackward() {
@@ -186,10 +184,6 @@ public boolean canPause() {
     @Override
     public void toggleFullScreen() {
 
-    }
-
-    public void startTag(View view) {
-        startActivity(new Intent(this, AddingTagsActivity.class));
     }
 // End VideoMediaController.MediaPlayerControl
 }
