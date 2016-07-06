@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Gallery Test</string>
+    <string name="description">description</string>
 </resources>
