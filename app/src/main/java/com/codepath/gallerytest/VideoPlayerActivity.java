@@ -38,7 +38,6 @@ public class VideoPlayerActivity extends Activity implements SurfaceHolder.Callb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
         videoSurface = (SurfaceView) findViewById(R.id.videoSurface);
-
         getVideo();
 
     }
@@ -130,7 +129,7 @@ public void onPrepared(MediaPlayer mp) {
     player.start();
 
     //BE SURE TO CAN THE TIME IF YOU WANT IT TO SHOW THE WHOLE TIME
-    controller.show(100000000);
+    controller.show(getDuration());
 }
 // End MediaPlayer.OnPreparedListener
 // Implement VideoMediaController.MediaPlayerControl

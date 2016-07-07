@@ -92,7 +92,7 @@ public class AddingTagsActivity extends Activity implements SurfaceHolder.Callba
         player.start();
 
         //BE SURE TO CAN THE TIME IF YOU WANT IT TO SHOW THE WHOLE TIME
-        controller.show(100000000);
+        controller.show(getDuration());
     }
     // End MediaPlayer.OnPreparedListener
 // Implement VideoMediaController.MediaPlayerControl

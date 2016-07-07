@@ -47,6 +47,7 @@ import java.lang.ref.WeakReference;
         import java.util.Formatter;
         import java.util.Locale;
 
+import javax.xml.datatype.Duration;
 
 
 /**
@@ -88,7 +89,7 @@ public class VideoControllerView extends FrameLayout {
     private TextView            mEndTime, mCurrentTime;
     private boolean             mShowing;
     private boolean             mDragging;
-    private static final int    sDefaultTimeout = 3000;
+    private static final int    sDefaultTimeout = 100000;
     private static final int    FADE_OUT = 1;
     private static final int    SHOW_PROGRESS = 2;
     private boolean             mUseFastForward;
@@ -104,6 +105,7 @@ public class VideoControllerView extends FrameLayout {
     private ImageButton         mPrevButton;
     private ImageButton         mFullscreenButton;
     private Handler             mHandler = new MessageHandler(this);
+    DottedSeekBar seeker;
 
     public VideoControllerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -215,8 +217,10 @@ public class VideoControllerView extends FrameLayout {
 
         mProgress = (ProgressBar) v.findViewById(R.id.mediacontroller_progress);
         if (mProgress != null) {
-            if (mProgress instanceof SeekBar) {
-                SeekBar seeker = (SeekBar) mProgress;
+            if (mProgress instanceof DottedSeekBar) {
+                seeker = (DottedSeekBar) mProgress;
+                setDots(100); //int 100 = time/10
+                seeker.setDotsDrawable(R.drawable.ic_dot);
                 seeker.setOnSeekBarChangeListener(mSeekListener);
             }
             mProgress.setMax(1000);
@@ -228,6 +232,10 @@ public class VideoControllerView extends FrameLayout {
         mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
 
         installPrevNextListeners();
+    }
+
+    public void setDots(int num){
+        seeker.setDots(new int[] {num});
     }
 
     /**
