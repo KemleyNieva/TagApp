@@ -12,7 +12,10 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.IOException;
@@ -154,6 +157,17 @@ public class AddingTagsActivity extends Activity implements SurfaceHolder.Callba
     @Override
     public void toggleFullScreen() {
 
+    }
+
+    public void addTag(View view) {
+        EditText etTagName =(EditText) findViewById(R.id.etTagName);
+        String tagName = etTagName.getText().toString();
+        int duration = Toast.LENGTH_SHORT;
+        Toast.makeText(getApplicationContext(), tagName,duration).show();
+        double Duration = getDuration();
+        double Tagtime = getCurrentPosition();
+        double dotValue = (Tagtime/(Duration/10))*100;
+        controller.setDots((int) dotValue);
     }
 // End VideoMediaController.MediaPlayerControl
 }

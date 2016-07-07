@@ -106,6 +106,8 @@ public class VideoControllerView extends FrameLayout {
     private ImageButton         mFullscreenButton;
     private Handler             mHandler = new MessageHandler(this);
     DottedSeekBar seeker;
+    //must change to time
+
 
     public VideoControllerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -219,7 +221,6 @@ public class VideoControllerView extends FrameLayout {
         if (mProgress != null) {
             if (mProgress instanceof DottedSeekBar) {
                 seeker = (DottedSeekBar) mProgress;
-                setDots(100); //int 100 = time/10
                 seeker.setDotsDrawable(R.drawable.ic_dot);
                 seeker.setOnSeekBarChangeListener(mSeekListener);
             }
@@ -235,7 +236,8 @@ public class VideoControllerView extends FrameLayout {
     }
 
     public void setDots(int num){
-        seeker.setDots(new int[] {num});
+        //add if statement
+        seeker.setDots(new int[]{num});
     }
 
     /**
