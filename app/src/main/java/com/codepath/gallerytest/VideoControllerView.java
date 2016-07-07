@@ -41,6 +41,8 @@ import android.view.View;
 
 import com.codepath.gallerytest.R;
 
+import org.w3c.dom.Text;
+
 import java.lang.ref.WeakReference;
         import java.util.Formatter;
         import java.util.Locale;
@@ -82,7 +84,7 @@ public class VideoControllerView extends FrameLayout {
     private Context             mContext;
     private ViewGroup           mAnchor;
     private View                mRoot;
-    private ProgressBar         mProgress;
+    private ProgressBar mProgress;
     private TextView            mEndTime, mCurrentTime;
     private boolean             mShowing;
     private boolean             mDragging;
@@ -512,7 +514,13 @@ public class VideoControllerView extends FrameLayout {
 
         public void onProgressChanged(SeekBar bar, int progress, boolean fromuser) {
             if (mPlayer == null) {
-                return;
+                int stepSize = 25;
+
+                progress = (progress/stepSize)*stepSize;
+                bar.setProgress(progress);
+
+                TextView sliderText = (TextView) findViewById(R.id.textView);
+                sliderText.setText("" + progress);
             }
 
             if (!fromuser) {
@@ -540,6 +548,8 @@ public class VideoControllerView extends FrameLayout {
             mHandler.sendEmptyMessage(SHOW_PROGRESS);
         }
     };
+
+
 
     @Override
     public void setEnabled(boolean enabled) {
@@ -650,6 +660,8 @@ public class VideoControllerView extends FrameLayout {
         boolean isFullScreen();
         void    toggleFullScreen();
     }
+
+
 
     private static class MessageHandler extends Handler {
         private final WeakReference<VideoControllerView> mView;

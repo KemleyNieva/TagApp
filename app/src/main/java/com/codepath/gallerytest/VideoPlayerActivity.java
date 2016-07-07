@@ -15,7 +15,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.VideoView;
 
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kemleynieva on 7/6/16.
@@ -35,6 +38,7 @@ public class VideoPlayerActivity extends Activity implements SurfaceHolder.Callb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
         videoSurface = (SurfaceView) findViewById(R.id.videoSurface);
+
         getVideo();
 
     }
@@ -78,10 +82,12 @@ public class VideoPlayerActivity extends Activity implements SurfaceHolder.Callb
         player = new MediaPlayer();
         controller = new VideoControllerView(this);
 
+
         try {
             player.setAudioStreamType(AudioManager.STREAM_MUSIC);
             player.setDataSource(this, Uri.parse(String.valueOf(uri)));
             player.setOnPreparedListener(this);
+
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -189,7 +195,9 @@ public boolean canPause() {
     }
 
     public void startTag(View view) {
-        startActivity(new Intent(this, AddingTagsActivity.class));
+        Intent addTags = new Intent(this, AddingTagsActivity.class);
+        addTags.putExtra("VideoUri",selectedImage.toString());
+        startActivity(addTags);
     }
 // End VideoMediaController.MediaPlayerControl
 }

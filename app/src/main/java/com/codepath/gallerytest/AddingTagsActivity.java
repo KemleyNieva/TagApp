@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -25,49 +26,18 @@ public class AddingTagsActivity extends Activity implements SurfaceHolder.Callba
     SurfaceView videoSurface;
     MediaPlayer player;
     VideoControllerView controller;
-    private static int RESULT_LOAD_VIDEO = 1;
-    String imgDecodableString;
+    Uri selectedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_tags);
         videoSurface = (SurfaceView) findViewById(R.id.videoSurface);
-        getVideo();
-
+        Log.d("URi",getIntent().getStringExtra("VideoUri") );
+        selectedImage = Uri.parse(getIntent().getStringExtra("VideoUri"));
+        RunVideo(selectedImage);
     }
-    public void getVideo(){
-        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
-        //android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        // Start the Intent
-        startActivityForResult(galleryIntent, RESULT_LOAD_VIDEO);
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        try {
-            if (requestCode == RESULT_LOAD_VIDEO && resultCode == RESULT_OK
-                    && null != data) {
 
-                Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Video.Media.DATA };
-
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                imgDecodableString = cursor.getString(columnIndex);
-                cursor.close();
-                RunVideo(selectedImage);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public void RunVideo(Uri uri){
         SurfaceHolder videoHolder = videoSurface.getHolder();

@@ -51,7 +51,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="82dp"
         android:orientation="horizontal">
 
         <TextView android:id="@+id/time_current"
@@ -69,8 +69,9 @@
             android:id="@+id/mediacontroller_progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dip"
-            android:layout_weight="1"
-            android:layout_height="32dip" />
+            android:layout_height="32dip"
+            android:layout_weight="1" />
+
 
         <TextView android:id="@+id/time"
             android:textSize="14sp"
@@ -80,7 +81,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="4dip" />
+            android:paddingLeft="4dip"
+            android:layout_weight="0.15" />
 
         <ImageButton android:id="@+id/fullscreen"
             android:layout_marginTop="-7dp"
